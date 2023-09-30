@@ -1,0 +1,16 @@
+doctype html
+html(lang='en')
+  head
+    meta(charset='UTF-8')
+    meta(name='viewport' content='width=device-width,initial-scale=1')
+    title Gallery
+    script(src="js/display.js")
+  body
+    div
+      for elem in arr
+        p #{elem.imageurl}
+        p #{elem.description}
+        p #{elem.when}
+        p #{elem.id}
+        //- input(type="button" onclick="deleteEntry(" + elem.id + ")" value="Delete")
+      

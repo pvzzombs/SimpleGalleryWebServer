@@ -1,0 +1,13 @@
+html/
+node_modules/
+npm_offline/
+.env
+.yarnrc
+install.txt
+log.txt
+serviceAccountKey.json
+test.png
+test.txt
+yarn-error.log
+yarn.lock
+*.swp
