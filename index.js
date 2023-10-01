@@ -59,7 +59,8 @@ app.get("/", function(req, res){
       throw error;
     }
     //console.log(results);
-    res.render("display", { arr: results });
+    //res.render("display", { arr: results });
+    res.send(results);
   });
 });
 
