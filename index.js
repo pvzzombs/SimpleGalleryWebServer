@@ -9,7 +9,7 @@ const fileUpload = require("express-fileupload");
 
 require("dotenv").config();
 
-const debugMode = false;
+const debugMode = process.env.DEBUG_MODE == "true" ? true : false;
 
 const dbOptions = {
   host: process.env.DB_HOST,
@@ -53,7 +53,7 @@ app.use(cookieParser());
 app.use(fileUpload());
 
 app.get("/", function(req, res){
-  connection.query("select * from `test3`", function(error, results, fields){
+  connection.query("SELECT * FROM `" + process.env.DB_TABLE + "`", function(error, results, fields){
     if(error){
       res.send(error);
       throw error;
@@ -88,6 +88,7 @@ app.post("/upload", function(req, res){
           res.send("Failed, an error occured.");
           throw err;
         }
+        //console.log("========");
         file.getSignedUrl({
           action: "read",
           expires: "03-09-2491"

@@ -8,9 +8,10 @@ html(lang='en')
   body
     div
       for elem in arr
+        p #{elem.id}
+        p #{elem.filename}
         p #{elem.imageurl}
         p #{elem.description}
         p #{elem.when}
-        p #{elem.id}
         //- input(type="button" onclick="deleteEntry(" + elem.id + ")" value="Delete")
       
