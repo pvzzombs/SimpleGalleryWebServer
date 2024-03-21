@@ -48,7 +48,8 @@ app.set("view engine", "pug");
 app.set("views", path.join(__dirname, "views"));
 app.use(express.static("public"));
 
-app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: true}));
 app.use(cookieParser());
 app.use(fileUpload());
 
@@ -59,7 +60,17 @@ app.get("/", function(req, res){
       throw error;
     }
     //console.log(results);
-    //res.render("display", { arr: results });
+    res.render("display", { arr: results });
+  });
+});
+
+app.get("/json", function(req, res){
+  connection.query("SELECT * FROM `" + process.env.DB_TABLE + "`", function(error, results, fields){
+    if(error){
+      res.send(error);
+      throw error;
+    }
+    //console.log(results);
     res.send(results);
   });
 });
@@ -120,6 +131,12 @@ app.get("/del", function(req, res){
 app.post("/del", function(req, res){
   //console.log(req.query);
   //res.send("hmmm");
+  const username = process.env.REQ_USERNAME;
+  const password = process.env.REQ_PASSWORD;
+  if(req.body.username != username || req.body.password != password){
+    res.send("Error: Access Denied");
+    return;
+  }
   if(req.body.id){
     const id = parseInt(req.body.id);
     if(!debugMode){

@@ -6,5 +6,7 @@ html(lang='en')
     title Delete
   body
     form(action='/del' method='post')
+      input(type='text' name='username' placeholder='Username here')
+      input(type='password' name='password' placeholder='Password here')
       input(type='text' name='id' placeholder='ID here')
       input(type='submit' value='Submit')
